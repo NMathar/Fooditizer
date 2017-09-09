@@ -1,7 +1,14 @@
 # Fooditizer
 This app provides a food inventory organizer
 
-Tools: Total.js + Vue.js + Nuxt + Vuetify + Vue-Router
+##Tools
+[Total.js](https://www.totaljs.com/?language=en)
+[Vue.js](https://vuejs.org/)
+[Nuxt](https://nuxtjs.org/)
+[Vuetify](https://vuetifyjs.com/)
+[Vue-Router](https://router.vuejs.org/en/)
+[QuaggaJS](https://serratus.github.io/quaggaJS/)
+ 
 
 ## Installation
 
