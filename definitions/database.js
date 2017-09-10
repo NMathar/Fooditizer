@@ -1,0 +1,1 @@
+require('sqlagent/mongodb').init(CONFIG('db'), false); // debug is by default: false

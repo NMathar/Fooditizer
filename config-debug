@@ -3,6 +3,13 @@ author                          : NMonst4
 version                         : 1.0.0
 secret                          : secret-key-for-web
 
+db                              : mongodb://127.0.0.1/fooditizer
+
+//oauth2
+oauth2.google.key               : key-string
+oauth2.google.secret            : secret-string
+
+
 // Vue configuration
 directory-public-virtual : /vue/
 directory-public : /public/

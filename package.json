@@ -21,9 +21,14 @@
   ],
   "author": "NMonst4",
   "license": "MIT",
-  "repository": { "type": "git", "url": "https://github.com/NMonst4/Fooditizer"},
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/NMonst4/Fooditizer"
+  },
   "dependencies": {
+    "mongodb": "^2.2.31",
     "nuxt": "latest",
+    "sqlagent": "^9.9.5",
     "total.js": "latest",
     "vuetify": "latest"
   },
