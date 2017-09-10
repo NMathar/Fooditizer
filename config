@@ -10,6 +10,9 @@ oauth2.google.key               : key-string
 oauth2.google.secret            : secret-string
 
 
+//admin
+adminemail                      : nico.mathar@gmail.com
+
 // Vue configuration
 directory-public-virtual : /vue/
 directory-public : /public/

@@ -51,3 +51,8 @@ function normalizePaths(paths) {
   return paths;
 }
   ```
+  
+
+## Login
+
+You need to create an google project in Devconsole and add ADMIN SDK to apis for your project.

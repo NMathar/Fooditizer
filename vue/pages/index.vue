@@ -7,7 +7,7 @@
             <!--<v-carousel-item v-for="(src, i) in images" v-bind:src="src" :key="i"></v-carousel-item>-->
         <!--</v-carousel>-->
 
-        <v-btn error fab large dark>
+        <v-btn error fab large dark href="/api/login/google/">
             G
         </v-btn>
     </div>
