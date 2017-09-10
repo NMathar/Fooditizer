@@ -38,7 +38,7 @@ NEWSCHEMA('Item').make(function(schema) {
 		var sql = DB(error);
 
 		sql.select('item', 'item').make(function(builder) {
-			builder.where('id', options.id);
+			builder.where('uid', options.id);
 			builder.where('isremoved', false);
 			builder.first();
 		});
@@ -56,10 +56,10 @@ NEWSCHEMA('Item').make(function(schema) {
 
 		sql.save('item', 'item', !options.id, function(builder, newbie) {
 			if (newbie) {
-				builder.set('datecreated', F.datetime);
+				builder.set(model);
 				return;
 			}
-			builder.where('id', options.id);
+			builder.where('uid', options.id);
 			builder.where('isremoved', false);
 		});
 
@@ -76,7 +76,7 @@ NEWSCHEMA('Item').make(function(schema) {
 
 		sql.update('item', 'item').make(function(builder) {
 			builder.set('isremoved', true);
-			builder.where('id', options.id);
+			builder.where('uid', options.id);
 		});
 
 		sql.validate('item', 'notfound');

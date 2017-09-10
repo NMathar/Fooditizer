@@ -1,6 +1,6 @@
 NEWSCHEMA('User').make(function(schema) {
 
-	schema.define('id', 'Number', true);
+	schema.define('uid', 'Number', true);
 	schema.define('displayName', 'String', true);
 	schema.define('email', 'Email', true);
 	schema.define('created', 'Date', true);
@@ -32,7 +32,7 @@ NEWSCHEMA('User').make(function(schema) {
 		var sql = DB(error);
 
 		sql.select('item', 'user').make(function(builder) {
-			builder.where('id', options.id);
+			builder.where('uid', options.id);
 			builder.where('isremoved', false);
 			builder.first();
 		});
@@ -53,7 +53,7 @@ NEWSCHEMA('User').make(function(schema) {
 				builder.set('datecreated', F.datetime);
 				return;
 			}
-			builder.where('id', options.id);
+			builder.where('uid', options.id);
 			builder.where('isremoved', false);
 		});
 
@@ -70,7 +70,7 @@ NEWSCHEMA('User').make(function(schema) {
 
 		sql.update('item', 'user').make(function(builder) {
 			builder.set('isremoved', true);
-			builder.where('id', options.id);
+			builder.where('uid', options.id);
 		});
 
 		sql.validate('item', 'notfound');
