@@ -36,13 +36,17 @@ function oauth_login_callback() {
     // ...
 
     MODULE('oauth2').callback(type, CONFIG('oauth2.' + type + '.key'), CONFIG('oauth2.' + type + '.secret'), url, self, function(err, profile, access_token) {
-        console.log(profile);
+        // console.log(profile);
 
         //TODO: write google data to user database for notifications
 
         //TODO: if email from google === email from config then admin CONFIG('adminemail')
 
         //TODO: create login session for this user
+
+        let user = {displayName: profile.displayName, email: profile.emails[0].value};
+
+
 
 
         self.json(SUCCESS(true));
