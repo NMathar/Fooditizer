@@ -45,9 +45,9 @@ NEWSCHEMA('User').make(function (schema) {
 
         // options.id
         // options.user
-        console.log('save user');
-        console.log(options);
-        console.log(model);
+        // console.log('save user');
+        // console.log(options);
+        // console.log(model);
 
         var sql = DB(error);
 
@@ -56,7 +56,6 @@ NEWSCHEMA('User').make(function (schema) {
                 options.uid = UID();
                 options.created = F.datetime;
                 options.isremoved = false;
-                console.log(options);
                 builder.set(options);
                 return;
             }
@@ -83,5 +82,27 @@ NEWSCHEMA('User').make(function (schema) {
         sql.validate('item', 'notfound');
         sql.exec(SUCCESS(callback), 'item');
     });
+
+    schema.addWorkflow('emailStillExist', function (error, model, user, callback) {
+        // console.log(user);
+
+        var sql = DB(error);
+
+        sql.select('item', 'user').make(function (builder) {
+            builder.where('email', user.email);
+            // builder.and();
+            builder.where('isremoved', false);
+            builder.first();
+        });
+
+        sql.exec(function (err, response) {
+            if (!err || !response.item)
+                callback(false);
+
+            if (response.item)
+                callback(response.item)
+        });
+    });
+
 
 });
