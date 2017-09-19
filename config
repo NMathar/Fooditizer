@@ -11,7 +11,7 @@ oauth2.google.secret            : secret-string
 
 
 //admin
-adminemail                      : nico.mathar@gmail.com
+adminemail                      : admin@gmail.com
 
 // Vue configuration
 directory-public-virtual : /vue/
