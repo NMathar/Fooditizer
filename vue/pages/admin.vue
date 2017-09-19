@@ -1,9 +1,7 @@
 <template>
     <div class="title" v-if="content">
-        <h2>Button content</h2>
-        <v-btn primary>Primary button</v-btn>
-        <v-btn secondary>Secondary button</v-btn>
-        <v-btn success>Success button</v-btn>
+        <h2>Admin Menu</h2>
+        <h4>//TODO: Show users</h4>
     </div>
 </template>
 

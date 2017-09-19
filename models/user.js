@@ -3,8 +3,11 @@ NEWSCHEMA('User').make(function (schema) {
     schema.define('uid', 'Number', true);
     schema.define('displayName', 'String', true);
     schema.define('email', 'Email', true);
+    schema.define('image', 'String', true);
     schema.define('created', 'Date', true);
+    schema.define('admin', 'Boolean', true);
     schema.define('isremoved', 'Boolean', true);
+
 
     schema.setQuery(function (error, options, callback) {
 
@@ -56,6 +59,9 @@ NEWSCHEMA('User').make(function (schema) {
                 options.uid = UID();
                 options.created = F.datetime;
                 options.isremoved = false;
+
+                options.admin = options.email === CONFIG('adminemail');
+
                 builder.set(options);
                 return;
             }
@@ -90,13 +96,13 @@ NEWSCHEMA('User').make(function (schema) {
 
         sql.select('item', 'user').make(function (builder) {
             builder.where('email', user.email);
-            // builder.and();
+            builder.and();
             builder.where('isremoved', false);
             builder.first();
         });
 
         sql.exec(function (err, response) {
-            if (!err || !response.item)
+            if (err || !response.item)
                 callback(false);
 
             if (response.item)

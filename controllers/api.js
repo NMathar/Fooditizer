@@ -7,9 +7,11 @@ exports.install = function () {
 function getUser () {
     var self = this;
     self.json(self.user);
+
+
 }
 
-function json_logoff() {
+function json_logoff () {
 
     let self = this;
     let auth = MODULE('auth');
@@ -19,7 +21,8 @@ function json_logoff() {
     // remove user session
     // @controller {Controller}
     // @id {String}
-    console.log(user.uid);
+    // console.log(user.uid);
+
     auth.logoff(self, user.uid);
 
     self.json(SUCCESS(true));

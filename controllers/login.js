@@ -40,34 +40,21 @@ function oauth_login_callback () {
 
         //TODO: write google data to user database for notifications
 
-        //TODO: if email from google === email from config then admin CONFIG('adminemail')
-
-
         if (profile) {
             let user = {
                 displayName: profile.displayName,
                 email: profile.emails[0].value,
+                image: profile.image.url,
                 created: new Date(),
                 isremoved: false
             };
-            // console.log(user);
-            // console.log('--------------------------');
-            // self.user.displayname = profile.displayName;
-            // self.user.email = profile.emails[0].value;
-
-            // GETSCHEMA('User').workflow('emailStillExist', user, function (res) {
-            //     console.log(res);
-            // });
 
             $WORKFLOW('User', 'emailStillExist', user, function (err, res) {
-                //TODO: double user create need to be fixt
-                console.log('emailCheck---> ',res);
-                // self.json({success: true});
                 let auth = MODULE('auth');
                 if (res) {
                     //auth user
                     auth.login(self, res.uid, res);
-                    self.redirect('/about');
+                    self.redirect('/');
                 } else {
                     //create new user
                     self.$save(user, function (err, res) {
@@ -77,9 +64,6 @@ function oauth_login_callback () {
                     })
                 }
             });
-
-            // console.log(self.user);
-            // self.$workflow('emailStillExist', user, self.callback());
         }
 
     });
