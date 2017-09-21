@@ -16,7 +16,7 @@
             </v-toolbar>
             <v-list class="pt-0" dense>
                 <v-divider></v-divider>
-                <v-list-tile v-for="item in items" :key="item.title" :to="item.href" :router="item.router" >
+                <v-list-tile v-for="item in items" :key="item.title" :to="item.href" :router="item.router">
                     <v-list-tile-action>
                         <v-icon>{{ item.icon }}</v-icon>
                     </v-list-tile-action>
@@ -43,6 +43,7 @@
                 </v-container>
             </v-content>
         </main>
+        <!--<div class="spinner" v-else-if="loading"></div>-->
     </v-app>
 </template>
 
@@ -56,22 +57,25 @@
         ]),
         data: () => ({
             user: {},
+            loading: true,
             drawer: true,
             items: [
-                {href: '/', router: true, title: 'Home', icon: 'dashboard'},
-                {href: '/admin', router: true, title: 'Admin', icon: 'dashboard'},
+                {href: '/dashboard', router: true, title: 'Dashboard', icon: 'dashboard'},
+                {href: '/admin', router: true, title: 'Admin', icon: 'settings'},
                 {href: '/about', router: true, title: 'About', icon: 'question_answer'}
             ],
             right: null
         }),
         methods: {
             getUser: function () {
+                let self = this;
                 // GET /someUrl
                 this.$http.get('/api/get/user').then(response => {
 //                    console.log(response.body);
                     // get body data
-                    this.user = response.body;
-                    this.$store.commit('SET_USER', this.user);
+                    self.user = response.body;
+                    self.$store.commit('SET_USER', this.user);
+                    self.loading = false;
 
 //                    if(!this.user){
 //                        window.location.href = '/';
@@ -81,6 +85,7 @@
                     // error callback
 //                    console.log('User Data');
                 });
+
             },
             logout: function () {
                 this.$http.get('/api/logoff/').then(response => {
@@ -97,7 +102,6 @@
         },
         mounted: function () {
             this.getUser();
-            console.log(this.$store.state.user);
         }
     }
 </script>
@@ -118,6 +122,46 @@
 
     #e3 .input-group--focused .input-group__append-icon {
         color: inherit !important;
+    }
+</style>
+
+
+<style>
+    .spinner {
+        width: 40px;
+        height: 40px;
+        background-color: #333;
+
+        margin: 100px auto;
+        -webkit-animation: sk-rotateplane 1.2s infinite ease-in-out;
+        animation: sk-rotateplane 1.2s infinite ease-in-out;
+    }
+
+    @-webkit-keyframes sk-rotateplane {
+        0% {
+            -webkit-transform: perspective(120px)
+        }
+        50% {
+            -webkit-transform: perspective(120px) rotateY(180deg)
+        }
+        100% {
+            -webkit-transform: perspective(120px) rotateY(180deg) rotateX(180deg)
+        }
+    }
+
+    @keyframes sk-rotateplane {
+        0% {
+            transform: perspective(120px) rotateX(0deg) rotateY(0deg);
+            -webkit-transform: perspective(120px) rotateX(0deg) rotateY(0deg)
+        }
+        50% {
+            transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg);
+            -webkit-transform: perspective(120px) rotateX(-180.1deg) rotateY(0deg)
+        }
+        100% {
+            transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+            -webkit-transform: perspective(120px) rotateX(-180deg) rotateY(-179.9deg);
+        }
     }
 </style>
 

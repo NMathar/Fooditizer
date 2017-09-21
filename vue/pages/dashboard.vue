@@ -1,24 +1,20 @@
 <template>
-    <div class="title" v-if="isAuthenticated">
-        <h2>Button content</h2>
-        <v-btn primary>Primary button</v-btn>
-        <v-btn secondary>Secondary button</v-btn>
-        <v-btn success>Success button</v-btn>
+    <div class="dashboard" v-if="isAuthenticated">
+        <h2>Dashboard</h2>
+        <h4>//TODO: Show users</h4>
     </div>
 </template>
 
 <script>
     import {mapGetters} from 'vuex'
+
     export default {
         computed: mapGetters([
             'isAuthenticated',
             'loggedUser'
         ]),
-        data: () => ({
-        }),
-        methods: {
-
-        },
+        data: () => ({}),
+        methods: {},
         mounted: function () {
             let self = this;
             setTimeout(function () {

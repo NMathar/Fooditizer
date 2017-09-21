@@ -1,26 +1,29 @@
 <template>
-    <div class="title" v-if="content">
+    <div class="title" v-if="isAuthenticated">
         <h2>Admin Menu</h2>
         <h4>//TODO: Show users</h4>
     </div>
 </template>
 
 <script>
+    import {mapGetters} from 'vuex'
     export default {
+        computed: mapGetters([
+            'isAuthenticated',
+            'loggedUser'
+        ]),
         data: () => ({
-            content: false
+//            content: false
         }),
-        methods: {
-            checkUser: function () {
-                if (!this.$store.state.user) {
-                    window.location.href = '/';
-                }else{
-                    this.content = true;
-                }
-            }
-        },
+//        methods: {
+//        },
         mounted: function () {
-            this.checkUser();
+            let self = this;
+            setTimeout(function () {
+                if(!self.isAuthenticated){
+                    window.location.href = '/';
+                }
+            }, 500);
         }
     }
 </script>

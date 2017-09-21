@@ -38,8 +38,6 @@ function oauth_login_callback () {
     MODULE('oauth2').callback(type, CONFIG('oauth2.' + type + '.key'), CONFIG('oauth2.' + type + '.secret'), url, self, function (err, profile, access_token) {
         // console.log(profile);
 
-        //TODO: write google data to user database for notifications
-
         if (profile) {
             let user = {
                 displayName: profile.displayName,
@@ -54,13 +52,13 @@ function oauth_login_callback () {
                 if (res) {
                     //auth user
                     auth.login(self, res.uid, res);
-                    self.redirect('/');
+                    self.redirect('/dashboard');
                 } else {
                     //create new user
                     self.$save(user, function (err, res) {
                         user.uid = res.value.identity;
                         auth.login(self, res.value.identity, user);
-                        self.redirect('/about');
+                        self.redirect('/dashboard');
                     })
                 }
             });
