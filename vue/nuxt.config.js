@@ -17,7 +17,7 @@ module.exports = {
   build: {
     vendor: ['vuetify'],
     extractCSS: true
-   
+
   },
   /*
   ** Load Vuetify into the app
